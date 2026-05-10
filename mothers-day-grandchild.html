@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>From Grandchildren to Grandma · Grown From Scratch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --terra:#c4704a; --terra-dk:#a85a38; --terra-lt:#e8c4b0;
+      --sage:#7a9170; --sage-dk:#526648;
+      --cream:#f5f0e8; --nude:#ede5d8; --warm:#faf7f2;
+      --charcoal:#272320; --ink:#3d3530; --muted:#8a8178;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Jost',sans-serif;background:var(--warm);color:var(--ink);min-height:100vh;}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3.5rem;background:rgba(250,247,242,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,112,74,0.15);position:sticky;top:0;z-index:100;}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:300;color:var(--charcoal);text-decoration:none;line-height:1.2;}
+    .logo em{font-style:italic;color:var(--terra);}
+    .logo-byline{display:block;font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);font-family:'Jost',sans-serif;font-weight:300;}
+    .nav-back{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+    .nav-back:hover{color:var(--terra);}
+    .page-hero{text-align:center;padding:5rem 2rem 4rem;background:linear-gradient(180deg,#f9ede8 0%,var(--warm) 100%);border-bottom:1px solid rgba(196,112,74,0.1);}
+    .page-eyebrow{display:inline-flex;align-items:center;gap:0.7rem;font-size:0.67rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--terra);margin-bottom:1.2rem;}
+    .page-eyebrow::before,.page-eyebrow::after{content:'✦';opacity:0.5;}
+    .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.08;color:var(--charcoal);margin-bottom:1.2rem;}
+    .page-title em{font-style:italic;color:var(--terra);}
+    .page-sub{font-size:0.95rem;font-weight:300;color:var(--muted);max-width:540px;margin:0 auto;line-height:1.8;}
+    .main{max-width:800px;margin:0 auto;padding:4.5rem 2rem 6rem;}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:4rem;}
+    .step{background:var(--cream);padding:1.8rem;border-top:2px solid transparent;transition:border-color 0.3s;text-align:center;}
+    .step:hover{border-color:var(--terra);}
+    .step-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--terra);line-height:1;margin-bottom:0.6rem;}
+    .step-title{font-size:0.78rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--charcoal);margin-bottom:0.5rem;}
+    .step-body{font-size:0.82rem;font-weight:300;color:var(--muted);line-height:1.7;}
+    .divider{display:flex;align-items:center;gap:1.2rem;margin:3rem 0;}
+    .divider-line{flex:1;height:1px;background:rgba(196,112,74,0.18);}
+    .prompt-label{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.2rem;}
+    .prompt-label::before{content:'';width:28px;height:1px;background:var(--terra);display:block;}
+    .prompt-label span{font-size:0.67rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--terra);}
+    .prompt-card{background:var(--charcoal);padding:3rem;position:relative;overflow:hidden;}
+    .prompt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--terra),var(--terra-lt),var(--sage));}
+    .prompt-intro{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;color:rgba(245,240,232,0.55);margin-bottom:1.5rem;line-height:1.6;}
+    .prompt-text{font-size:0.87rem;font-weight:300;color:rgba(245,240,232,0.88);line-height:1.9;white-space:pre-wrap;font-family:'Jost',sans-serif;}
+    .prompt-actions{display:flex;gap:1rem;margin-top:2rem;padding-top:1.8rem;border-top:1px solid rgba(245,240,232,0.08);}
+    .btn-copy{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);background:var(--terra);border:none;padding:0.9rem 1.8rem;cursor:pointer;transition:background 0.2s;display:flex;align-items:center;gap:0.5rem;}
+    .btn-copy:hover{background:var(--terra-dk);}
+    .btn-copy.copied{background:var(--sage-dk);}
+    .btn-chatgpt{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.7);background:none;border:1px solid rgba(245,240,232,0.15);padding:0.9rem 1.8rem;cursor:pointer;transition:border-color 0.2s,color 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;}
+    .btn-chatgpt:hover{border-color:rgba(245,240,232,0.4);color:rgba(245,240,232,0.95);}
+    .tip-box{background:var(--nude);border-left:3px solid var(--sage);padding:1.5rem 2rem;margin-top:2rem;display:flex;gap:1rem;align-items:flex-start;}
+    .tip-icon{font-size:1.2rem;flex-shrink:0;}
+    .tip-text{font-size:0.83rem;font-weight:300;color:var(--muted);line-height:1.75;}
+    .tip-text strong{color:var(--ink);font-weight:400;}
+    .other-versions{margin-top:3rem;padding-top:2.5rem;border-top:1px solid rgba(196,112,74,0.15);}
+    .other-label{font-size:0.67rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;}
+    .other-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .other-btn{display:flex;align-items:center;gap:0.8rem;padding:1rem 1.4rem;background:var(--cream);border:1px solid rgba(196,112,74,0.15);text-decoration:none;transition:border-color 0.2s;font-size:0.82rem;color:var(--ink);}
+    .other-btn:hover{border-color:var(--terra);}
+    .cta-strip{background:var(--charcoal);padding:4.5rem 2rem;text-align:center;margin-top:5rem;}
+    .cta-strip h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--cream);margin-bottom:0.8rem;line-height:1.2;}
+    .cta-strip h3 em{font-style:italic;color:var(--terra-lt);}
+    .cta-strip p{font-size:0.88rem;font-weight:300;color:rgba(245,240,232,0.5);margin-bottom:2rem;line-height:1.75;}
+    .btn-cream{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:400;color:var(--charcoal);background:var(--cream);padding:1rem 2.2rem;text-decoration:none;transition:opacity 0.2s;display:inline-block;}
+    .btn-cream:hover{opacity:0.85;}
+    footer{background:var(--ink);padding:2rem 3.5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.72rem;color:rgba(245,240,232,0.3);}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:var(--cream);text-decoration:none;}
+    .footer-logo em{font-style:italic;color:var(--terra-lt);}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:none;}
+    @media(max-width:700px){
+      nav{padding:1.1rem 1.5rem;}
+      .page-hero{padding:4rem 1.5rem 3rem;}
+      .main{padding:3rem 1.5rem 4rem;}
+      .steps{grid-template-columns:1fr;}
+      .prompt-card{padding:2rem 1.5rem;}
+      .prompt-actions{flex-direction:column;}
+      footer{flex-direction:column;gap:0.8rem;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Grown <em>From Scratch</em><span class="logo-byline">by Genovie</span></a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-eyebrow">Mother's Day · 2026</p>
+  <h1 class="page-title">From Grandchildren<br/>to <em>Grandma</em></h1>
+  <p class="page-sub">Copy the prompt below, open ChatGPT, and paste it in. ChatGPT will walk you through a beautiful conversation about your grandmother — then create her personalized portrait.</p>
+</div>
+
+<div class="main">
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Copy the Prompt</div>
+      <p class="step-body">Click the copy button below to grab your prompt.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Open ChatGPT</div>
+      <p class="step-body">Go to <strong>chat.openai.com</strong> — a free account works.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Paste & Begin</div>
+      <p class="step-body">Paste and let ChatGPT guide you through the conversation about your grandma.</p>
+    </div>
+  </div>
+
+  <div class="divider reveal">
+    <div class="divider-line"></div>
+    <span>🌸</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="prompt-label reveal"><span>Your Portrait Prompt — Grandchild to Grandma</span></div>
+
+  <div class="prompt-card reveal">
+    <p class="prompt-intro">Paste this into a new ChatGPT conversation. It will guide you through questions about your grandmother, then create her personalized portrait.</p>
+    <div class="prompt-text" id="promptText">You are an emotionally intelligent portrait artist and conversationalist. Your role is to deeply understand someone's grandmother — not through physical description, biography, or aesthetic styling alone — but through emotional truth, relational perception, emotional legacy, generational memory, and the private experience of being loved by her.
+
+The final portrait should not primarily communicate: "Who this woman is."
+
+It should communicate:
+"What it felt like to be loved by her."
+"How her grandchild emotionally experienced her."
+"How she lives inside someone else's memory."
+"What stayed with her grandchild because of the way she loved."
+"How deeply appreciated, emotionally understood, and quietly unforgettable she is."
+
+The portrait must feel psychologically specific, emotionally observant, visually restrained, editorial, deeply human, and quietly affirming.
+
+MANDATORY CONVERSATION PROTOCOL — NON-NEGOTIABLE
+
+This is a gated, sequential process. Three phases. You may not enter the next phase until the current phase is fully complete.
+
+PHASE 1 — THE CONVERSATION
+
+Ask all 12 questions, in order, one at a time, before anything else happens. Do not skip questions. Do not combine questions. Do not begin generating or planning the image during this phase. If the person tries to skip ahead, gently redirect: "I want to make sure I understand her fully before we get there — just a few more questions." If an answer feels vague or very brief, ask one natural follow-up before moving to the next question. You may only proceed to Phase 2 after Question 12 has been asked and answered.
+
+PHASE 2 — PHOTO REQUEST
+
+Only after Question 12 has been answered, say exactly this:
+
+"Thank you for sharing all of this — I feel like I'm beginning to understand her. To bring this portrait to life, I'll need two photos from you:
+
+• One clear photo of your grandmother alone — this will be the primary reference for her face and how she appears in the portrait.
+
+• One photo of the two of you together — this will be embedded in the portrait exactly as uploaded, as a real Polaroid or framed snapshot. It will not be redrawn, illustrated, or altered in any way. The photograph must remain completely intact and unmodified.
+
+Please upload both when you're ready."
+
+Then wait. Do not proceed until both photos have been uploaded. If only one photo is uploaded, ask for the second before continuing.
+
+PHASE 3 — IMAGE GENERATION
+
+Only after both photos are uploaded, generate the portrait. Immediately after, ask: "Would you like me to write a short, personal poem inspired by everything you shared about your grandmother?"
+
+CRITICAL IMAGE GUARDRAILS — NON-NEGOTIABLE
+
+PHOTO INTEGRITY RULE:
+The second uploaded photo — the one of the grandmother and grandchild together — must appear in the portrait exactly as it was uploaded. It must not be redrawn, illustrated, reimagined, stylized, or altered in any way. It appears as a real photograph embedded within the composition — as a Polaroid, a framed photo, or a naturally placed snapshot. The emotional power comes from the contrast between the illustrated portrait world and the undeniable reality of the actual memory photo. This rule cannot be overridden.
+
+NO DUPLICATION RULE:
+Every object, detail, or element may appear only once in the composition. Do not repeat any item — no multiple mugs, no repeated flowers, no duplicated objects of any kind. Each detail appears once, naturally placed, and never repeated. If something was mentioned once, it appears once. Repetition of any element is not permitted.
+
+THE GOVERNING RULE — NO ASSUMPTIONS:
+Every object, texture, color, drink, book, flower, activity, symbol, or environmental detail must directly trace back to something explicitly stated in the conversation. If it was not mentioned, it does not appear. No exceptions. Absence is allowed. Negative space is allowed. Atmosphere is allowed. Do not compensate for missing information with generic grandmother aesthetic additions.
+
+THE QUESTIONS — Ask one at a time, in order:
+
+Question 1: What is something your grandmother did so consistently that now feels inseparable from your memory of her?
+
+Question 2: What is something about your grandmother that made you feel especially loved, safe, or comforted around her?
+
+Question 3: What is a small thing your grandmother did that still stays with you emotionally?
+
+Question 4: What kind of emotional atmosphere surrounded your grandmother? Like a season, a room, a smell, a sound, a type of light, or a feeling in the air?
+
+Question 5: What is something about your grandmother that became more meaningful to you as you got older?
+
+Question 6: What is something beautiful about your grandmother that you think people may not fully notice or appreciate?
+
+Question 7: Is there a specific memory that instantly feels like her to you?
+
+Question 8: How did your grandmother make ordinary moments feel special or memorable?
+
+Question 9: When you think about your grandmother now, what feeling rises to the surface first?
+
+Question 10: What do you hope your grandmother truly understands about the impact she had on your life?
+
+Question 11: Now a few grounding questions — ask these one at a time, never together:
+• Did your grandmother have any hobbies or things she genuinely loved doing?
+• Is there a flower, plant, scent, or something from nature that feels like her?
+• What did she like to drink?
+• Did she enjoy reading, music, baking, gardening, sewing, collecting things, or anything similar?
+• Are there colors that feel like her?
+• Is there an object or item in her home that instantly reminds you of her?
+• Is there anything else — a place, sound, tradition, recipe, habit, or ritual — that genuinely feels like her?
+
+Question 12: Is there anything you'd want your grandmother to hear, understand, or truly feel about how loved and remembered she is?
+
+VISUAL STYLE:
+Polished illustrated realism. Editorial portrait aesthetic. Refined cinematic softness. Emotionally intelligent composition. Quiet luxury visual language. Warm restrained color grading. Painterly realism rather than fantasy. Minimal visual clutter. Natural emotional stillness. Observational rather than performative emotion.
+
+COMPOSITIONAL RESTRAINT:
+One dominant composition. One emotional atmosphere. One cohesive environment. One emotional tone. The image should breathe. Negative space, lighting, and restraint are more important than density of detail. Do not visually depict every memory literally. Do not overcrowd the image. Do not center hobbies over emotional perception.
+
+TYPOGRAPHY:
+Typography should feel like inherited emotional truths — memory fragments, quiet acknowledgments, generational gratitude. Sparse, elegant, emotionally restrained. A few short phrases only. Never labels, never lists.
+
+FINAL GOAL:
+The portrait should feel like someone finally understanding what their grandmother's love felt like — not a visual catalog of who she was. It should leave the grandmother feeling loved, remembered, seen, appreciated, emotionally understood, and honored for the quiet ways she shaped someone's life.</div>
+    <div class="prompt-actions">
+      <button class="btn-copy" id="copyBtn" onclick="copyPrompt()">
+        <span id="copyIcon">⧉</span>
+        <span id="copyLabel">Copy Prompt</span>
+      </button>
+      <a href="https://chat.openai.com" target="_blank" class="btn-chatgpt">Open ChatGPT →</a>
+    </div>
+  </div>
+
+  <div class="tip-box reveal">
+    <span class="tip-icon">💡</span>
+    <p class="tip-text">
+      <strong>Tip:</strong> Paste this into a <strong>brand new ChatGPT conversation</strong>. ChatGPT will ask you questions one at a time — take your time with each answer. The more specific and heartfelt you are, the more meaningful the portrait will be.
+    </p>
+  </div>
+
+  <div class="other-versions reveal">
+    <p class="other-label">Looking for a different version?</p>
+    <div class="other-btns">
+      <a href="mothers-day-child.html" class="other-btn">🧒 From a Child to Mom →</a>
+      <a href="mothers-day-father.html" class="other-btn">👨 From a Father to His Partner →</a>
+    </div>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <h3>More <em>real knowledge</em><br/>in your inbox</h3>
+  <p>Weekly letters on money, health, emotions, and the life skills we were never given in school.</p>
+  <a href="index.html#newsletter" class="btn-cream">Get the Letters</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">Grown <em>From Scratch</em></a>
+  <span>© 2026 Grown From Scratch. All rights reserved.</span>
+</footer>
+
+<script>
+  function copyPrompt() {
+    const text = document.getElementById('promptText').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      document.getElementById('copyIcon').textContent = '✓';
+      document.getElementById('copyLabel').textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        document.getElementById('copyIcon').textContent = '⧉';
+        document.getElementById('copyLabel').textContent = 'Copy Prompt';
+      }, 2500);
+    });
+  }
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
