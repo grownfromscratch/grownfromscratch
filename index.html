@@ -24,7 +24,6 @@
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Jost', sans-serif;
       background: var(--warm);
@@ -32,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* ── GRAIN TEXTURE ── */
     body::after {
       content: '';
       position: fixed;
@@ -70,11 +68,18 @@
       text-decoration: none;
     }
     .logo em { font-style: italic; color: var(--terra); }
-    .nav-links {
-      display: flex;
-      gap: 2.8rem;
-      list-style: none;
+    .logo-byline {
+      display: block;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-style: normal;
+      margin-top: 0.15rem;
     }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
     .nav-links a {
       text-decoration: none;
       font-size: 0.72rem;
@@ -141,34 +146,35 @@
     }
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.8rem, 6.5vw, 6.5rem);
-      font-weight: 300;
-      line-height: 0.96;
+      font-weight: 400;
+      line-height: 1.05;
       color: var(--charcoal);
       opacity: 0;
       animation: fadeUp 0.9s ease forwards 0.4s;
-      letter-spacing: -0.01em;
     }
-    .hero-title em {
+    .hero-title-main {
+      font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+      display: block;
+      font-weight: 500;
+    }
+    .hero-title-sub {
+      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+      display: block;
+      font-weight: 300;
       font-style: italic;
-      color: var(--terra);
-      display: block;
-    }
-    .hero-title span {
-      display: block;
       color: var(--sage-dk);
+      margin-top: 0.3rem;
     }
     .hero-body {
-      font-size: 1.02rem;
+      font-size: 1rem;
       font-weight: 300;
       color: var(--muted);
-      line-height: 1.82;
+      line-height: 1.85;
       margin-top: 2rem;
-      max-width: 400px;
+      max-width: 420px;
       opacity: 0;
       animation: fadeUp 0.9s ease forwards 0.6s;
     }
-    .hero-body strong { color: var(--ink); font-weight: 400; }
     .hero-actions {
       display: flex;
       gap: 1.2rem;
@@ -220,7 +226,6 @@
       font-style: italic;
       color: var(--muted);
     }
-
     .hero-right { position: relative; overflow: hidden; }
     .hero-img-wrap {
       position: absolute; inset: 0;
@@ -262,10 +267,10 @@
       margin-top: 0.4rem;
     }
 
-    /* ── MARQUEE ── */
+    /* ── MARQUEE — warm terracotta bg, cream text ── */
     .marquee-wrap {
       background: var(--terra);
-      padding: 0.85rem 0;
+      padding: 0.9rem 0;
       overflow: hidden;
       white-space: nowrap;
     }
@@ -277,13 +282,13 @@
       font-size: 0.68rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(250,247,242,0.8);
+      color: rgba(250,247,242,0.88);
       padding: 0 2.5rem;
       display: inline-flex;
       align-items: center;
       gap: 2.5rem;
     }
-    .marquee-item::after { content: '✦'; color: rgba(250,247,242,0.35); }
+    .marquee-item::after { content: '✦'; color: rgba(250,247,242,0.45); }
     @keyframes marquee {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
@@ -331,12 +336,7 @@
     }
 
     /* ── SHARED ── */
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
+    .eyebrow { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
     .eyebrow-line { width: 28px; height: 1px; background: var(--terra); flex-shrink: 0; }
     .eyebrow-text {
       font-size: 0.67rem;
@@ -352,53 +352,62 @@
       color: var(--charcoal);
     }
     .section-title em { font-style: italic; color: var(--terra); }
-    .section-title strong { font-weight: 300; color: var(--sage-dk); }
 
     /* ── ABOUT ── */
     .about {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 85vh;
+      grid-template-columns: 420px 1fr;
+      min-height: 80vh;
+      align-items: stretch;
     }
-    .about-img-wrap { position: relative; overflow: hidden; }
+    .about-img-wrap {
+      position: relative;
+      overflow: hidden;
+      max-height: 780px;
+    }
     .about-img-wrap img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      filter: saturate(0.72);
+      object-position: top center;
+      filter: saturate(0.82);
       transition: transform 8s ease;
+      display: block;
     }
     .about-img-wrap:hover img { transform: scale(1.03); }
     .about-badge {
       position: absolute;
-      bottom: 2.5rem; right: -1rem;
+      bottom: 2rem; right: -1rem;
       background: var(--terra);
       color: var(--warm);
-      padding: 1.4rem 1.8rem;
+      padding: 1.2rem 1.6rem;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-style: italic;
       line-height: 1.5;
-      max-width: 210px;
+      max-width: 200px;
     }
     .about-content {
-      padding: 6rem 5rem;
+      padding: 5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       background: var(--nude);
     }
     .about-body {
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       font-weight: 300;
       color: var(--muted);
-      line-height: 1.9;
+      line-height: 1.95;
       margin-top: 1.8rem;
-      max-width: 440px;
+      max-width: 480px;
     }
+    .about-body p { margin-bottom: 1rem; }
+    .about-body p:last-child { margin-bottom: 0; }
     .about-body strong { color: var(--ink); font-weight: 400; }
     .about-pull {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       font-weight: 300;
       font-style: italic;
       color: var(--terra);
@@ -406,107 +415,21 @@
       margin-top: 2.5rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(196,112,74,0.18);
-      max-width: 380px;
+      max-width: 400px;
     }
 
-    /* ── TOPICS ── */
-    .topics {
-      padding: 7rem 5.5rem;
-      background: var(--warm);
-    }
-    .topics-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 4rem;
-    }
-    .view-all {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--terra);
-      text-decoration: none;
-      border-bottom: 1px solid var(--terra);
-      padding-bottom: 2px;
-      transition: opacity 0.2s;
-    }
-    .view-all:hover { opacity: 0.65; }
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
-    }
-    .post-card {
-      background: var(--cream);
-      overflow: hidden;
-      transition: transform 0.35s ease;
-      cursor: pointer;
-    }
-    .post-card:hover { transform: translateY(-5px); }
-    .post-card:hover .post-img { transform: scale(1.04); }
-    .post-img-wrap { height: 240px; overflow: hidden; position: relative; }
-    .post-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease;
-      filter: saturate(0.78);
-    }
-    .post-tag-badge {
-      position: absolute;
-      top: 1rem; left: 1rem;
-      background: var(--charcoal);
-      color: var(--cream);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.35rem 0.75rem;
-    }
-    .post-body { padding: 1.8rem; }
-    .post-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 400;
-      line-height: 1.3;
-      color: var(--charcoal);
-      margin-bottom: 0.7rem;
-    }
-    .post-excerpt {
-      font-size: 0.82rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-    .post-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1.4rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(196,112,74,0.15);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-    .read-more {
-      color: var(--terra);
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .read-more:hover { opacity: 0.65; }
-
-    /* ── TOPIC BLOCKS ── */
+    /* ── TOPIC BLOCKS — stock images, no people ── */
     .topic-blocks { display: grid; grid-template-columns: repeat(5, 1fr); }
     .topic-block { position: relative; height: 380px; overflow: hidden; cursor: pointer; }
     .topic-block img {
       width: 100%; height: 100%;
       object-fit: cover;
-      filter: saturate(0.45) brightness(0.62);
+      filter: saturate(0.5) brightness(0.65);
       transition: transform 0.7s ease, filter 0.4s;
     }
     .topic-block:hover img {
       transform: scale(1.07);
-      filter: saturate(0.65) brightness(0.72);
+      filter: saturate(0.7) brightness(0.75);
     }
     .topic-overlay {
       position: absolute; inset: 0;
@@ -514,7 +437,7 @@
       flex-direction: column;
       justify-content: flex-end;
       padding: 2rem;
-      background: linear-gradient(to top, rgba(39,35,32,0.75) 0%, transparent 55%);
+      background: linear-gradient(to top, rgba(39,35,32,0.78) 0%, transparent 55%);
     }
     .topic-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
     .topic-name {
@@ -578,12 +501,7 @@
       color: var(--charcoal);
       display: block;
     }
-    .md-btn-sub {
-      font-size: 0.7rem;
-      color: var(--muted);
-      display: block;
-      margin-top: 0.2rem;
-    }
+    .md-btn-sub { font-size: 0.7rem; color: var(--muted); display: block; margin-top: 0.2rem; }
     .md-btn-arrow { color: var(--terra); font-size: 1.1rem; }
     .md-visual {
       background: linear-gradient(135deg, #f9ede8 0%, #f0e4d4 60%, #e8ddd0 100%);
@@ -637,12 +555,7 @@
       line-height: 1.82;
       margin-top: 1.2rem;
     }
-    .nl-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.8rem;
-    }
+    .nl-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.8rem; }
     .nl-pill {
       font-size: 0.63rem;
       letter-spacing: 0.15em;
@@ -679,17 +592,10 @@
       transition: background 0.2s;
     }
     .nl-form button:hover { background: var(--terra-dk); }
-    .nl-note {
-      font-size: 0.68rem;
-      color: rgba(245,240,232,0.28);
-      margin-top: 0.2rem;
-    }
+    .nl-note { font-size: 0.68rem; color: rgba(245,240,232,0.28); margin-top: 0.2rem; }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      padding: 4.5rem 5.5rem 2.5rem;
-    }
+    footer { background: var(--ink); padding: 4.5rem 5.5rem 2.5rem; }
     .footer-top {
       display: grid;
       grid-template-columns: 1.8fr 1fr 1fr 1fr;
@@ -725,7 +631,7 @@
     .footer-col a {
       font-size: 0.82rem;
       font-weight: 300;
-      color: rgba(245,240,232,0.38);
+      color: rgba(245,240,242,0.38);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -772,16 +678,14 @@
       .hero { grid-template-columns: 1fr; }
       .hero-right { height: 55vh; }
       .hero-left { padding: 7rem 2rem 3rem; }
-      .hero-title { font-size: 3.2rem; }
+      .hero-title-main { font-size: 3rem; }
+      .hero-title-sub { font-size: 1.6rem; }
       .hero-float-card { display: none; }
       .pillars { grid-template-columns: 1fr 1fr; }
       .pillar:nth-child(5) { grid-column: span 2; }
       .about { grid-template-columns: 1fr; }
-      .about-img-wrap { height: 55vh; }
+      .about-img-wrap { max-height: 500px; }
       .about-content { padding: 3.5rem 2rem; }
-      .topics { padding: 5rem 2rem; }
-      .topics-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-      .posts-grid { grid-template-columns: 1fr; }
       .topic-blocks { grid-template-columns: 1fr 1fr; }
       .topic-block:last-child { grid-column: span 2; }
       .mothers-day { grid-template-columns: 1fr; }
@@ -798,13 +702,13 @@
 
 <!-- NAV -->
 <nav id="mainNav">
-  <a href="#" class="logo">Grown <em>From Scratch</em></a>
+  <a href="#" class="logo">Grown <em>From Scratch</em><span class="logo-byline">by Genovie</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#topics">Money</a></li>
     <li><a href="#topics">Health</a></li>
     <li><a href="#topics">Mind</a></li>
-    <li><a href="#topics">Business</a></li>
+    <li><a href="#topics">Values</a></li>
   </ul>
   <a href="#newsletter" class="nav-cta">Get the Letters</a>
 </nav>
@@ -817,16 +721,17 @@
       <span class="kicker-text">Everything We Were Never Taught</span>
     </div>
     <h1 class="hero-title">
-      The real
-      <em>education</em>
-      <span>starts here.</span>
+      <span class="hero-title-main">Become more intentional.</span>
+      <span class="hero-title-sub">Learn beyond survival.</span>
     </h1>
     <p class="hero-body">
-      They taught us the quadratic formula. They skipped <strong>taxes, boundaries, budgeting, grief, and how to actually build a life.</strong> We're filling in the blanks — together.
+      We learned how to pass exams. Not necessarily how to build a life.<br/><br/>
+      Money, relationships, emotional health, purpose, identity — the things that shape us most were often left unexplained.<br/><br/>
+      Grown From Scratch exists to explore them — thoughtfully, honestly, and together.
     </p>
     <div class="hero-actions">
       <a href="#topics" class="btn-terra">Start Learning</a>
-      <a href="#about" class="btn-outline">Our Story</a>
+      <a href="#about" class="btn-outline">The Philosophy</a>
     </div>
     <div class="hero-footnote">
       <p>Surprise, Arizona · Est. 2026</p>
@@ -846,13 +751,13 @@
   </div>
 </section>
 
-<!-- MARQUEE -->
+<!-- MARQUEE — terracotta bg, cream text -->
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     <span class="marquee-item">Financial Literacy</span>
     <span class="marquee-item">Emotional Intelligence</span>
     <span class="marquee-item">How Taxes Work</span>
-    <span class="marquee-item">Starting a Business</span>
+    <span class="marquee-item">Personal Values</span>
     <span class="marquee-item">Coping Mechanisms</span>
     <span class="marquee-item">Real Nutrition</span>
     <span class="marquee-item">Building Credit</span>
@@ -862,7 +767,7 @@
     <span class="marquee-item">Financial Literacy</span>
     <span class="marquee-item">Emotional Intelligence</span>
     <span class="marquee-item">How Taxes Work</span>
-    <span class="marquee-item">Starting a Business</span>
+    <span class="marquee-item">Personal Values</span>
     <span class="marquee-item">Coping Mechanisms</span>
     <span class="marquee-item">Real Nutrition</span>
     <span class="marquee-item">Building Credit</span>
@@ -895,98 +800,40 @@
     <p class="pillar-text">Purpose, self-worth, boundaries, and building a life that actually feels like yours.</p>
   </div>
   <div class="pillar reveal" style="transition-delay:0.32s">
-    <span class="pillar-icon">🏢</span>
-    <h3 class="pillar-title">Business</h3>
-    <p class="pillar-text">Contracts, pricing, how to get paid. Everything you need to build something of your own.</p>
+    <span class="pillar-icon">🧭</span>
+    <h3 class="pillar-title">Values</h3>
+    <p class="pillar-text">Who are you becoming? Clarifying what you stand for, what you tolerate, and what kind of life you're building.</p>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-img-wrap">
-    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop&q=80" alt="Genovie"/>
-    <div class="about-badge">The education that should have always existed.</div>
+    <img src="genovie.png" alt="Genovie"/>
+    <div class="about-badge">Growth doesn't have to be perfect to be meaningful.</div>
   </div>
   <div class="about-content">
     <div class="eyebrow reveal">
       <div class="eyebrow-line"></div>
       <span class="eyebrow-text">About</span>
     </div>
-    <h2 class="section-title reveal">Built by someone who had to<br/><em>figure it all out</em> herself.</h2>
-    <p class="about-body reveal">
-      I'm Genovie — based in Surprise, Arizona. Like a lot of us, I walked out of school knowing how to dissect a frog but <strong>not how to file my taxes, understand a lease, or process my own emotions.</strong>
-    </p>
-    <p class="about-body reveal" style="margin-top:1rem;">
-      Grown From Scratch is the resource I wish I'd had. Whether you're 22 and just starting out, or 42 and finally filling in gaps you didn't know you had — <strong>this space is for you.</strong>
-    </p>
-    <p class="about-pull reveal">
-      "It's not your fault you weren't taught. But it is your turn to learn."
-    </p>
+    <h2 class="section-title reveal">Built by someone still<br/><em>figuring it out</em> —<br/>and sharing what she learns.</h2>
+    <div class="about-body reveal">
+      <p>I'm Genovie — based in Arizona — and like a lot of people, I entered adulthood knowing how to memorize information, but not necessarily how to build a life.</p>
+      <p>No one really taught us how to understand money, communicate well, regulate emotions, create healthy routines, think critically, or become intentional about who we were becoming. <strong>So I started learning.</strong></p>
+      <p>Grown From Scratch is a collection of the things I'm exploring, questioning, testing, unlearning, and rebuilding in real time — across money, health, mind, spirit, and values.</p>
+      <p>Some of it is practical. Some of it is philosophical. Some of it is deeply personal. But all of it comes from the belief that <strong>growth doesn't have to be perfect to be meaningful.</strong></p>
+      <p>Whether you're just starting out or starting over, this space is for people who want to live more thoughtfully, more intentionally, and more fully awake to their own lives.</p>
+    </div>
+    <p class="about-pull reveal">"A fully developed human being doesn't happen by chance."</p>
   </div>
 </section>
 
-<!-- TOPICS / JOURNAL -->
-<section class="topics" id="topics">
-  <div class="topics-header reveal">
-    <div>
-      <div class="eyebrow">
-        <div class="eyebrow-line"></div>
-        <span class="eyebrow-text">From the Journal</span>
-      </div>
-      <h2 class="section-title">The lessons<br/><em>worth having.</em></h2>
-    </div>
-    <a href="#" class="view-all">View All →</a>
-  </div>
-  <div class="posts-grid">
-    <div class="post-card reveal">
-      <div class="post-img-wrap">
-        <img class="post-img" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop&q=80" alt="Taxes"/>
-        <span class="post-tag-badge">Money</span>
-      </div>
-      <div class="post-body">
-        <h3 class="post-title">How to File Your Taxes When No One Ever Showed You How</h3>
-        <p class="post-excerpt">A plain-language breakdown of W-2s, deductions, and refunds — no accounting degree required.</p>
-        <div class="post-meta">
-          <span>May 2026</span>
-          <a href="#" class="read-more">Read →</a>
-        </div>
-      </div>
-    </div>
-    <div class="post-card reveal" style="transition-delay:0.1s">
-      <div class="post-img-wrap">
-        <img class="post-img" src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=600&auto=format&fit=crop&q=80" alt="Emotions"/>
-        <span class="post-tag-badge">Mind</span>
-      </div>
-      <div class="post-body">
-        <h3 class="post-title">The Coping Skills They Should Have Taught Us in 8th Grade</h3>
-        <p class="post-excerpt">Healthy emotional regulation isn't something you're born with or not. It's a skill — and here's how to build it.</p>
-        <div class="post-meta">
-          <span>April 2026</span>
-          <a href="#" class="read-more">Read →</a>
-        </div>
-      </div>
-    </div>
-    <div class="post-card reveal" style="transition-delay:0.2s">
-      <div class="post-img-wrap">
-        <img class="post-img" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&auto=format&fit=crop&q=80" alt="Nutrition"/>
-        <span class="post-tag-badge">Health</span>
-      </div>
-      <div class="post-body">
-        <h3 class="post-title">The Food Pyramid Was Wrong. Here's What We Know Now.</h3>
-        <p class="post-excerpt">What decades of updated nutrition science actually says — and how to eat in a way that works for your real life.</p>
-        <div class="post-meta">
-          <span>March 2026</span>
-          <a href="#" class="read-more">Read →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TOPIC BLOCKS -->
-<div class="topic-blocks">
+<!-- TOPIC BLOCKS — object/still life stock photos only -->
+<div class="topic-blocks" id="topics">
   <div class="topic-block">
-    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&auto=format&fit=crop&q=80" alt="Money"/>
+    <!-- Money: calculator, coins, paperwork on desk -->
+    <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&auto=format&fit=crop&q=80" alt="Money"/>
     <div class="topic-overlay">
       <span class="topic-icon">💰</span>
       <h3 class="topic-name">Money</h3>
@@ -994,7 +841,8 @@
     </div>
   </div>
   <div class="topic-block">
-    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&auto=format&fit=crop&q=80" alt="Health"/>
+    <!-- Health: colorful fresh plate of food -->
+    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop&q=80" alt="Health"/>
     <div class="topic-overlay">
       <span class="topic-icon">🥗</span>
       <h3 class="topic-name">Health</h3>
@@ -1002,7 +850,8 @@
     </div>
   </div>
   <div class="topic-block">
-    <img src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=600&auto=format&fit=crop&q=80" alt="Mind"/>
+    <!-- Mind: open journal, pen, candle -->
+    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop&q=80" alt="Mind"/>
     <div class="topic-overlay">
       <span class="topic-icon">🧠</span>
       <h3 class="topic-name">Mind</h3>
@@ -1010,7 +859,8 @@
     </div>
   </div>
   <div class="topic-block">
-    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&auto=format&fit=crop&q=80" alt="Spirit"/>
+    <!-- Spirit: candle, flowers, soft light -->
+    <img src="https://images.unsplash.com/photo-1602178506429-c7e1a8e11d4e?w=600&auto=format&fit=crop&q=80" alt="Spirit"/>
     <div class="topic-overlay">
       <span class="topic-icon">🌱</span>
       <h3 class="topic-name">Spirit</h3>
@@ -1018,10 +868,11 @@
     </div>
   </div>
   <div class="topic-block">
-    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80" alt="Business"/>
+    <!-- Values: compass, map, still life -->
+    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&auto=format&fit=crop&q=80" alt="Values"/>
     <div class="topic-overlay">
-      <span class="topic-icon">🏢</span>
-      <h3 class="topic-name">Business</h3>
+      <span class="topic-icon">🧭</span>
+      <h3 class="topic-name">Values</h3>
       <p class="topic-sub">Coming Soon</p>
     </div>
   </div>
@@ -1034,12 +885,12 @@
       <div class="eyebrow-line"></div>
       <span class="eyebrow-text">✦ Mother's Day · 2026</span>
     </div>
-    <h2 class="section-title reveal">A gift <em>grown</em><br/>from your words.</h2>
+    <h2 class="section-title reveal">A portrait <em>grown</em> from<br/>memory, reflection, and love.</h2>
     <p class="md-body reveal">
       Tell us about the mother in your life — her quiet habits, her colors, the way a room feels when she's in it — and we'll turn your words into a personalized prompt that generates a portrait unlike anything you could buy.
     </p>
     <div class="md-buttons reveal">
-      <a href="#" class="md-btn">
+      <a href="https://tally.so/r/ja5Mea" target="_blank" class="md-btn">
         <span class="md-btn-icon">🧒</span>
         <span class="md-btn-text">
           <span class="md-btn-title">From a Child to Mom</span>
@@ -1047,7 +898,7 @@
         </span>
         <span class="md-btn-arrow">→</span>
       </a>
-      <a href="#" class="md-btn">
+      <a href="https://tally.so/r/Ekv1LA" target="_blank" class="md-btn">
         <span class="md-btn-icon">👨</span>
         <span class="md-btn-text">
           <span class="md-btn-title">From a Father to His Partner</span>
@@ -1080,13 +931,13 @@
       <span class="nl-pill">🥗 Health</span>
       <span class="nl-pill">🧠 Mind</span>
       <span class="nl-pill">🌱 Spirit</span>
-      <span class="nl-pill">🏢 Business</span>
+      <span class="nl-pill">🧭 Values</span>
     </div>
   </div>
   <div class="nl-form reveal">
     <input type="text" placeholder="Your first name"/>
     <input type="email" placeholder="Your email address"/>
-    <button type="button">Start Learning</button>
+    <button type="button" onclick="window.open('https://grown-from-scratch-by-genovie.beehiiv.com/subscribe','_blank')">Start Learning</button>
     <p class="nl-note">✦ No spam. Unsubscribe whenever. Your inbox is yours.</p>
   </div>
 </section>
@@ -1095,8 +946,8 @@
 <footer>
   <div class="footer-top">
     <div>
-      <span class="footer-brand">Grown <em>From Scratch</em></span>
-      <p class="footer-bio">Everything we were never taught — money, health, emotions, spirit, and business. Built for the ones who had to figure it out themselves, and for the ones who don't have to anymore.</p>
+      <span class="footer-brand">Grown <em>From Scratch</em><small style="display:block;font-size:0.6rem;letter-spacing:0.2em;color:rgba(245,240,232,0.4);font-style:normal;margin-top:0.2rem;">by Genovie</small></span>
+      <p class="footer-bio">Everything we were never taught — money, health, emotions, spirit, and values. Built for the ones who had to figure it out themselves, and for the ones who don't have to anymore.</p>
     </div>
     <div class="footer-col">
       <h4>Topics</h4>
@@ -1105,7 +956,7 @@
         <li><a href="#">Real Health</a></li>
         <li><a href="#">Mind & Emotions</a></li>
         <li><a href="#">Spirit & Purpose</a></li>
-        <li><a href="#">Business Basics</a></li>
+        <li><a href="#">Values & Identity</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1114,7 +965,7 @@
         <li><a href="#">Free Guides</a></li>
         <li><a href="#">Budget Templates</a></li>
         <li><a href="#">Recommended Tools</a></li>
-        <li><a href="#">Mother's Day Gift</a></li>
+        <li><a href="mothers-day.html">Mother's Day Gift</a></li>
         <li><a href="#">Work With Me</a></li>
       </ul>
     </div>
@@ -1122,8 +973,8 @@
       <h4>Connect</h4>
       <ul>
         <li><a href="#">Instagram</a></li>
-        <li><a href="#">Newsletter</a></li>
-        <li><a href="#">About Genovie</a></li>
+        <li><a href="https://grown-from-scratch-by-genovie.beehiiv.com/subscribe" target="_blank">Newsletter</a></li>
+        <li><a href="#about">About Genovie</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Privacy Policy</a></li>
       </ul>
