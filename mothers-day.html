@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Mother's Day Reflection · Grown From Scratch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --terra:    #c4704a;
+      --terra-dk: #a85a38;
+      --terra-lt: #e8c4b0;
+      --sage:     #7a9170;
+      --sage-dk:  #526648;
+      --cream:    #f5f0e8;
+      --nude:     #ede5d8;
+      --warm:     #faf7f2;
+      --charcoal: #272320;
+      --ink:      #3d3530;
+      --muted:    #8a8178;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3.5rem;
+      background: rgba(250,247,242,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(196,112,74,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .logo em { font-style: italic; color: var(--terra); }
+    .nav-back {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-back:hover { color: var(--terra); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      background: linear-gradient(180deg, #f9ede8 0%, var(--warm) 100%);
+      border-bottom: 1px solid rgba(196,112,74,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '🌸';
+      position: absolute;
+      font-size: 18rem;
+      opacity: 0.04;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .page-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.67rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1.2rem;
+    }
+    .page-eyebrow::before,
+    .page-eyebrow::after { content: '✦'; opacity: 0.5; }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--charcoal);
+      margin-bottom: 1.2rem;
+    }
+    .page-title em { font-style: italic; color: var(--terra); }
+    .page-sub {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem 6rem;
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .step {
+      background: var(--cream);
+      padding: 1.8rem;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s;
+      text-align: center;
+    }
+    .step:hover { border-color: var(--terra); }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--terra);
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+    .step-title {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    .step-body {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 3rem 0;
+    }
+    .divider-line { flex: 1; height: 1px; background: rgba(196,112,74,0.18); }
+    .divider-icon { color: var(--terra); font-size: 0.9rem; opacity: 0.5; }
+
+    /* ── PROMPT CARD ── */
+    .prompt-section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .prompt-section-label::before { content: ''; width: 28px; height: 1px; background: var(--terra); display: block; }
+    .prompt-section-label span {
+      font-size: 0.67rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--terra);
+    }
+    .prompt-card {
+      background: var(--charcoal);
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .prompt-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--terra), var(--terra-lt), var(--sage));
+    }
+    .prompt-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(245,240,232,0.6);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .prompt-text {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.88);
+      line-height: 1.9;
+      white-space: pre-wrap;
+      font-family: 'Jost', sans-serif;
+      letter-spacing: 0.01em;
+    }
+    .prompt-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(245,240,232,0.08);
+    }
+    .btn-copy {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm);
+      background: var(--terra);
+      border: none;
+      padding: 0.9rem 1.8rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-copy:hover { background: var(--terra-dk); }
+    .btn-copy.copied { background: var(--sage-dk); }
+    .btn-chatgpt {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.7);
+      background: none;
+      border: 1px solid rgba(245,240,232,0.15);
+      padding: 0.9rem 1.8rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-chatgpt:hover {
+      border-color: rgba(245,240,232,0.4);
+      color: rgba(245,240,232,0.95);
+    }
+
+    /* ── HOW TO USE ── */
+    .how-to {
+      background: var(--nude);
+      padding: 2.5rem;
+      margin-top: 2rem;
+      border-left: 3px solid var(--sage);
+    }
+    .how-to-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 1.2rem;
+    }
+    .how-to-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      counter-reset: how-steps;
+    }
+    .how-to-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.65;
+      counter-increment: how-steps;
+    }
+    .how-to-step::before {
+      content: counter(how-steps);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--terra);
+      min-width: 20px;
+      line-height: 1.3;
+    }
+    .how-to-step strong { color: var(--ink); font-weight: 400; }
+    .how-to-step a {
+      color: var(--terra);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196,112,74,0.3);
+      transition: border-color 0.2s;
+    }
+    .how-to-step a:hover { border-color: var(--terra); }
+
+    /* ── TIP BOX ── */
+    .tip-box {
+      background: var(--warm);
+      border: 1px solid rgba(196,112,74,0.15);
+      padding: 1.5rem 2rem;
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .tip-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .tip-text {
+      font-size: 0.83rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .tip-text strong { color: var(--ink); font-weight: 400; }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: var(--charcoal);
+      padding: 4.5rem 2rem;
+      text-align: center;
+      margin-top: 5rem;
+    }
+    .cta-strip h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+    .cta-strip h3 em { font-style: italic; color: var(--terra-lt); }
+    .cta-strip p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 2rem;
+      line-height: 1.75;
+    }
+    .btn-cream {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: var(--charcoal);
+      background: var(--cream);
+      padding: 1rem 2.2rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      display: inline-block;
+    }
+    .btn-cream:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 2rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: rgba(245,240,232,0.3);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .footer-logo em { font-style: italic; color: var(--terra-lt); }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      nav { padding: 1.1rem 1.5rem; }
+      .page-hero { padding: 4rem 1.5rem 3rem; }
+      .main { padding: 3rem 1.5rem 4rem; }
+      .steps { grid-template-columns: 1fr; }
+      .prompt-card { padding: 2rem 1.5rem; }
+      .prompt-actions { flex-direction: column; }
+      .how-to { padding: 1.8rem; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Grown <em>From Scratch</em></a>
+  <a href="index.html" class="nav-back">← Back to Journal</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <p class="page-eyebrow">Mother's Day Reflection · 2026</p>
+  <h1 class="page-title">Your portrait prompt<br/>is <em>ready.</em></h1>
+  <p class="page-sub">Below is your personalized prompt, built from your words. Copy it, open ChatGPT, and watch something beautiful come to life.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STEPS -->
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Copy the Prompt</div>
+      <p class="step-body">Click the copy button below to grab your personalized prompt.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Open ChatGPT</div>
+      <p class="step-body">Go to <strong>chat.openai.com</strong> — a free account works perfectly.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Paste & Generate</div>
+      <p class="step-body">Paste your prompt and hit send. Your portrait will appear in seconds.</p>
+    </div>
+  </div>
+
+  <div class="divider reveal">
+    <div class="divider-line"></div>
+    <span class="divider-icon">🌸</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- PROMPT -->
+  <div class="prompt-section-label reveal">
+    <span>Your Personalized Prompt</span>
+  </div>
+
+  <div class="prompt-card reveal">
+    <p class="prompt-intro">This prompt was built from your answers — every detail is specific to the mother you described.</p>
+    <div class="prompt-text" id="promptText">
+<!-- PROMPT CONTENT GOES HERE — replace this placeholder with the actual prompt text when wiring up via Zapier / email link -->
+You are a warm, emotionally intelligent portrait artist and poet. Based on the following reflections about a mother, create a deeply personalized illustrated portrait and — if requested — an accompanying poem.
+
+The portrait should feel like a painting that captures not just her appearance, but her emotional presence — the way she makes a room feel, the quiet love in her daily acts, the beauty that often goes unnoticed.
+
+Use the following personal details to inform every element of the portrait: her colors, her nature, her objects, her rituals, her emotional atmosphere. Nothing should be generic. Everything should feel unmistakably like her.
+
+[Your personalized responses will appear here when delivered via email.]
+
+Generate the portrait in a warm, painterly illustration style — soft light, rich texture, intimate in scale. If a poem is requested, write it in free verse, 12–16 lines, from the perspective of the person who answered these questions.
+    </div>
+    <div class="prompt-actions">
+      <button class="btn-copy" id="copyBtn" onclick="copyPrompt()">
+        <span id="copyIcon">⧉</span>
+        <span id="copyLabel">Copy Prompt</span>
+      </button>
+      <a href="https://chat.openai.com" target="_blank" class="btn-chatgpt">
+        Open ChatGPT →
+      </a>
+    </div>
+  </div>
+
+  <!-- HOW TO USE -->
+  <div class="how-to reveal">
+    <h3 class="how-to-title">A few tips for the best result</h3>
+    <div class="how-to-steps">
+      <div class="how-to-step">
+        Go to <a href="https://chat.openai.com" target="_blank">chat.openai.com</a> — <strong>a free account is all you need.</strong> You don't need ChatGPT Plus for this.
+      </div>
+      <div class="how-to-step">
+        Paste the full prompt into a <strong>new conversation.</strong> Don't add anything else — just paste and press enter.
+      </div>
+      <div class="how-to-step">
+        If you want to <strong>adjust the style</strong> of the illustration, you can add a follow-up message like "make it more watercolor" or "warmer tones" after the first image generates.
+      </div>
+      <div class="how-to-step">
+        To <strong>save your portrait</strong>, right-click the image and choose "Save image as" — or use the download button that appears when you hover over it.
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box reveal">
+    <span class="tip-icon">💡</span>
+    <p class="tip-text">
+      <strong>Want to print it?</strong> After downloading, sites like Canva, Artifact Uprising, or even CVS Photo can print your portrait on canvas or as a high-quality photo print — making it a truly tangible gift she can keep forever.
+    </p>
+  </div>
+
+</div>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <h3>More <em>real knowledge</em><br/>in your inbox</h3>
+  <p>Weekly letters on money, health, emotions, and the life skills<br/>we were never given in school. Join the community.</p>
+  <a href="index.html#newsletter" class="btn-cream">Get the Letters</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">Grown <em>From Scratch</em></a>
+  <span>© 2026 Grown From Scratch. All rights reserved.</span>
+</footer>
+
+<script>
+  // Copy prompt to clipboard
+  function copyPrompt() {
+    const text = document.getElementById('promptText').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      const icon = document.getElementById('copyIcon');
+      const label = document.getElementById('copyLabel');
+      btn.classList.add('copied');
+      icon.textContent = '✓';
+      label.textContent = 'Copied!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        icon.textContent = '⧉';
+        label.textContent = 'Copy Prompt';
+      }, 2500);
+    });
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
