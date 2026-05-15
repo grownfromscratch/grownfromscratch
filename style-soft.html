@@ -246,7 +246,7 @@
   <span class="hero-cloud">☁️</span>
   <h1 class="hero-title">Soft &amp;<br/><em>Intentional</em></h1>
   <div class="hero-rule"></div>
-  <p class="hero-sub">Want ChatGPT to analyze you? This prompt draws out the warmth, the depth, and the version of you that exists in the quiet — without overstating anything.</p>
+  <p class="hero-sub">You asked ChatGPT to know you. This prompt draws out the warmth, the depth, and the version of you that exists in the quiet — without overstating anything.</p>
 </div>
 
 <div class="main">
@@ -289,7 +289,8 @@
       <div class="prompt-body">
         <div class="ruled-margin"></div>
         <div class="prompt-scroll">
-          <pre class="prompt-text" id="soft-prompt">
+          <pre class="prompt-text" id="soft-prompt">Soft &amp; intentional ☁️
+
 Use the attached photo as the reference for my appearance and transform me into a stylized character version of myself - visually appealing, refined, emotionally intelligent, and psychologically accurate without feeling exaggerated, artificial, hyper-curated, or fantasy-driven.
 
 Include my name [GENOVIE] somewhere within the image as an elegant, artistically integrated design element. Do not omit the name.
@@ -492,6 +493,33 @@ Ensure the subject feels psychologically seen rather than theatrically analyzed.
 </footer>
 
 <script>
+  // ── Name Personalization ──────────────────────────────────────────────────
+  const PLACEHOLDER_NAME  = 'Genovie';
+  const PLACEHOLDER_UPPER = 'GENOVIE';
+
+  (function personalize() {
+    const params  = new URLSearchParams(window.location.search);
+    const rawName = (params.get('name') || '').trim();
+    if (!rawName) return;
+
+    const displayName = rawName.charAt(0).toUpperCase() + rawName.slice(1).toLowerCase();
+    const upperName   = displayName.toUpperCase();
+
+    function replaceInNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.textContent = node.textContent
+          .replace(new RegExp(PLACEHOLDER_UPPER, 'g'), upperName)
+          .replace(new RegExp(PLACEHOLDER_NAME,  'g'), displayName);
+      } else {
+        node.childNodes.forEach(replaceInNode);
+      }
+    }
+    replaceInNode(document.body);
+
+    document.title = document.title.replace(PLACEHOLDER_NAME, displayName);
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
+
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
