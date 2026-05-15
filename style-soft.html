@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soft & Intentional · Grown From Scratch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --warm:#faf7f2; --cream:#f5f0e8; --nude:#ede5d8;
+      --linen:#e8e0d2; --parchment:#dfd5c5;
+      --caramel:#c4975a; --caramel-dk:#a07840;
+      --caramel-gl:rgba(196,151,90,0.12); --caramel-bd:rgba(196,151,90,0.25);
+      --terra:#c4704a; --terra-lt:#e8c4b0;
+      --sand:#b8a898; --sand-lt:#d4ccc0;
+      --ink:#2e2820; --ink-mid:#4a4038; --muted:#8a8070;
+      --muted-body:rgba(46,40,32,0.65);
+      --border:rgba(196,151,90,0.18); --border-lt:rgba(196,151,90,0.1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Jost',sans-serif;background:var(--warm);color:var(--ink);min-height:100vh;overflow-x:hidden;}
+
+    /* Subtle paper grain */
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+      opacity:0.022;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:256px;}
+
+    /* NAV */
+    nav{display:flex;align-items:center;justify-content:space-between;padding:1.3rem 3rem;
+      background:rgba(250,247,242,0.96);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border-lt);position:sticky;top:0;z-index:100;}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:300;color:var(--ink);text-decoration:none;line-height:1.2;}
+    .logo em{font-style:italic;color:var(--terra);}
+    .logo-byline{display:block;font-size:0.48rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);font-weight:300;}
+    .nav-back{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+    .nav-back:hover{color:var(--caramel);}
+
+    /* HERO */
+    .hero{
+      position:relative;overflow:hidden;
+      padding:6rem 2rem 5.5rem;text-align:center;
+      background:
+        radial-gradient(ellipse 70% 80% at 30% 20%, rgba(232,196,176,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 80%, rgba(196,151,90,0.12) 0%, transparent 55%),
+        linear-gradient(180deg, #f8f0e8 0%, var(--warm) 100%);
+      border-bottom:1px solid var(--border);
+    }
+
+    /* Soft watermark circle */
+    .hero::before{content:'☁';position:absolute;font-size:22rem;opacity:0.04;
+      top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;color:var(--caramel);}
+
+    .hero-badge{display:inline-flex;align-items:center;gap:0.5rem;
+      font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;
+      color:var(--caramel);border:1px solid var(--caramel-bd);
+      padding:0.38rem 1rem;margin-bottom:1.8rem;position:relative;z-index:2;}
+
+    .hero-cloud{font-size:2.2rem;display:block;margin-bottom:1rem;position:relative;z-index:2;
+      animation:drift 6s ease-in-out infinite;}
+    @keyframes drift{0%,100%{transform:translateX(0);}50%{transform:translateX(6px);}}
+
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6.5vw,5.8rem);
+      font-weight:300;line-height:1.02;color:var(--ink);margin-bottom:0.5rem;position:relative;z-index:2;}
+    .hero-title em{font-style:italic;color:var(--terra);}
+
+    .hero-rule{
+      width:80px;height:1px;margin:1.6rem auto;position:relative;z-index:2;
+      background:linear-gradient(90deg,transparent,var(--caramel),transparent);
+    }
+
+    .hero-sub{font-size:0.92rem;font-weight:300;color:var(--muted);
+      max-width:460px;margin:0 auto;line-height:1.92;position:relative;z-index:2;}
+
+    /* MAIN */
+    .main{max-width:860px;margin:0 auto;padding:4.5rem 2rem 6rem;}
+
+    /* SECTION EYEBROW */
+    .section-eyebrow{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;
+      color:var(--caramel);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.8rem;}
+    .section-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--caramel-bd),transparent);}
+
+    /* INTRO TEXT */
+    .intro-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.2vw,1.42rem);
+      font-weight:300;line-height:1.9;color:var(--muted-body);
+      border-left:2px solid var(--caramel);padding-left:2rem;margin-bottom:4rem;}
+    .intro-text em{font-style:italic;color:var(--terra);}
+
+    /* WHAT GRID */
+    .what-section{margin-bottom:4rem;}
+    .what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+      border:1px solid var(--border);margin-top:1.5rem;}
+    .what-item{background:var(--cream);padding:2rem 1.8rem;position:relative;
+      border-right:1px solid var(--border);transition:background 0.3s;}
+    .what-item:last-child{border-right:none;}
+    .what-item:hover{background:var(--nude);}
+    .what-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:var(--caramel);opacity:0;transition:opacity 0.3s;}
+    .what-item:hover::before{opacity:0.6;}
+    .what-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;
+      color:var(--caramel);opacity:0.4;line-height:1;margin-bottom:0.7rem;}
+    .what-label{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-mid);margin-bottom:0.6rem;font-weight:400;}
+    .what-body{font-size:0.82rem;font-weight:300;color:var(--muted);line-height:1.72;}
+
+    /* PROMPT BOX — editorial journal style */
+    .prompt-wrapper{margin-bottom:4rem;}
+
+    .prompt-journal{
+      background:var(--cream);
+      border:1px solid var(--border);
+      position:relative;margin-top:1.5rem;
+      box-shadow:0 4px 32px rgba(196,151,90,0.06), 0 1px 0 var(--border);
+    }
+
+    /* Journal header — mimics a notebook cover strip */
+    .journal-header{
+      background:var(--nude);
+      border-bottom:1px solid var(--border);
+      padding:1rem 1.8rem;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .journal-header-left{display:flex;align-items:center;gap:0.8rem;}
+    .journal-dot{width:8px;height:8px;border-radius:50%;background:var(--caramel);opacity:0.5;}
+    .journal-title-text{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);}
+    .journal-lines-icon{font-size:0.9rem;color:var(--sand-lt);}
+
+    /* Left ruled lines effect */
+    .prompt-body{
+      display:grid;grid-template-columns:40px 1fr;
+    }
+    .ruled-margin{
+      background:var(--nude);
+      border-right:1px solid var(--caramel-bd);
+      position:relative;
+    }
+    .ruled-margin::after{
+      content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+      width:1px;height:100%;background:rgba(196,151,90,0.15);
+    }
+
+    .prompt-scroll{
+      max-height:400px;overflow-y:auto;padding:2rem 2.4rem 2rem 2rem;
+      scrollbar-width:thin;scrollbar-color:var(--caramel-bd) transparent;
+      /* ruled lines */
+      background-image:repeating-linear-gradient(
+        transparent, transparent 31px,
+        rgba(196,151,90,0.08) 31px, rgba(196,151,90,0.08) 32px
+      );
+      background-size:100% 32px;
+      line-height:32px;
+    }
+    .prompt-scroll::-webkit-scrollbar{width:3px;}
+    .prompt-scroll::-webkit-scrollbar-thumb{background:var(--caramel-bd);}
+
+    .prompt-text{
+      font-family:'Lora',serif;
+      font-size:0.8rem;line-height:2;
+      color:var(--ink-mid);
+      white-space:pre-wrap;user-select:all;
+    }
+
+    .copy-btn{
+      display:flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;
+      font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;
+      color:var(--caramel);background:transparent;border:none;border-top:1px solid var(--border);
+      padding:1rem;cursor:pointer;font-family:'Jost',sans-serif;transition:all 0.25s;
+    }
+    .copy-btn:hover{background:var(--caramel-gl);}
+    .copy-btn.copied{color:var(--terra);}
+
+    /* HOW STEPS */
+    .how-section{margin-bottom:4rem;}
+    .how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+      border:1px solid var(--border);margin-top:1.5rem;}
+    .how-step{background:var(--nude);padding:2rem 1.5rem;text-align:center;
+      border-right:1px solid var(--border);}
+    .how-step:last-child{border-right:none;}
+    .how-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;
+      color:var(--caramel);opacity:0.45;line-height:1;margin-bottom:0.6rem;}
+    .how-step-title{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;
+      color:var(--ink);margin-bottom:0.5rem;font-weight:400;}
+    .how-step-body{font-size:0.78rem;font-weight:300;color:var(--muted);line-height:1.65;}
+
+    /* CTA BLOCK */
+    .cta-block{
+      background:var(--nude);border:1px solid var(--border);padding:3rem 2.5rem;
+      display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;
+      position:relative;overflow:hidden;
+    }
+    .cta-block::before{content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 50% 100% at 100% 50%,rgba(196,151,90,0.07) 0%,transparent 60%);pointer-events:none;}
+    .cta-block h3{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:300;color:var(--ink);line-height:1.2;margin-bottom:0.6rem;}
+    .cta-block h3 em{font-style:italic;color:var(--terra);}
+    .cta-block p{font-size:0.82rem;font-weight:300;color:var(--muted);line-height:1.72;}
+    .chatgpt-link{display:inline-flex;align-items:center;gap:0.5rem;
+      font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--cream);background:var(--ink);padding:0.95rem 1.8rem;text-decoration:none;
+      white-space:nowrap;transition:all 0.2s;}
+    .chatgpt-link:hover{background:var(--ink-mid);}
+
+    /* NEWSLETTER */
+    .newsletter-strip{background:var(--ink);padding:4rem 2rem;text-align:center;margin-top:5rem;}
+    .newsletter-strip h3{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:var(--cream);margin-bottom:0.8rem;line-height:1.2;}
+    .newsletter-strip h3 em{font-style:italic;color:var(--terra-lt);}
+    .newsletter-strip p{font-size:0.85rem;font-weight:300;color:rgba(245,240,232,0.45);margin-bottom:2rem;line-height:1.75;}
+    .btn-soft{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--ink);background:var(--cream);padding:0.9rem 2rem;
+      text-decoration:none;display:inline-block;transition:opacity 0.2s;}
+    .btn-soft:hover{opacity:0.85;}
+
+    footer{background:#1e1a15;padding:1.8rem 3rem;display:flex;justify-content:space-between;align-items:center;
+      font-size:0.7rem;color:rgba(245,240,232,0.25);}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:var(--cream);text-decoration:none;opacity:0.65;}
+    .footer-logo em{font-style:italic;color:var(--terra-lt);}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:none;}
+
+    @media(max-width:768px){
+      nav{padding:1rem 1.4rem;}
+      .hero{padding:4.5rem 1.5rem 3.5rem;}
+      .main{padding:3rem 1.5rem 4rem;}
+      .what-grid{grid-template-columns:1fr;}
+      .what-item{border-right:none;border-bottom:1px solid var(--border);}
+      .what-item:last-child{border-bottom:none;}
+      .how-steps{grid-template-columns:1fr;}
+      .how-step{border-right:none;border-bottom:1px solid var(--border);}
+      .how-step:last-child{border-bottom:none;}
+      .cta-block{grid-template-columns:1fr;gap:1.5rem;text-align:center;}
+      .prompt-scroll{max-height:300px;}
+      .prompt-body{grid-template-columns:24px 1fr;}
+      footer{flex-direction:column;gap:0.6rem;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Grown <em>From Scratch</em><span class="logo-byline">by Genovie</span></a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Style A · Your Prompt</div>
+  <span class="hero-cloud">☁️</span>
+  <h1 class="hero-title">Soft &amp;<br/><em>Intentional</em></h1>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">You asked ChatGPT to know you. This prompt draws out the warmth, the depth, and the version of you that exists in the quiet — without overstating anything.</p>
+</div>
+
+<div class="main">
+
+  <p class="intro-text reveal">
+    This prompt guides ChatGPT to analyze your conversation history and surface your <em>psychological patterns, emotional rhythms, and quiet ambitions</em> — then render them as a warm, editorial portrait that feels less like a character and more like a mirror held up with care.
+  </p>
+
+  <div class="what-section reveal">
+    <div class="section-eyebrow">What this creates</div>
+    <div class="what-grid">
+      <div class="what-item">
+        <div class="what-num">01</div>
+        <div class="what-label">The Analysis</div>
+        <p class="what-body">ChatGPT reads your conversational patterns — emotional rhythms, recurring themes, behavioral contradictions — and identifies your two psychological archetypes.</p>
+      </div>
+      <div class="what-item">
+        <div class="what-num">02</div>
+        <div class="what-label">The Portrait</div>
+        <p class="what-body">A warm, editorial illustration of you. Golden light, linen textures, handwritten notes. Your archetypes displayed through a refined, intimate identity card integrated into the scene.</p>
+      </div>
+      <div class="what-item">
+        <div class="what-num">03</div>
+        <div class="what-label">The Feeling</div>
+        <p class="what-body">Still. Honest. The kind of image that doesn't demand attention — it earns it. Soft, but not shallow. You, studied quietly and rendered beautifully.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="prompt-wrapper reveal">
+    <div class="section-eyebrow">Your Prompt — Copy &amp; Paste into ChatGPT</div>
+    <div class="prompt-journal">
+      <div class="journal-header">
+        <div class="journal-header-left">
+          <div class="journal-dot"></div>
+          <span class="journal-title-text">soft-intentional-prompt.txt</span>
+        </div>
+        <span class="journal-lines-icon">≡</span>
+      </div>
+      <div class="prompt-body">
+        <div class="ruled-margin"></div>
+        <div class="prompt-scroll">
+          <pre class="prompt-text" id="soft-prompt">Soft &amp; intentional ☁️
+
+Use the attached photo as the reference for my appearance and transform me into a stylized character version of myself - visually appealing, refined, emotionally intelligent, and psychologically accurate without feeling exaggerated, artificial, hyper-curated, or fantasy-driven.
+
+Include my name [GENOVIE] somewhere within the image as an elegant, artistically integrated design element. Do not omit the name.
+
+The final image should look like a polished digital illustration or sophisticated animated editorial portrait - NOT a real photograph.
+
+The overall atmosphere should feel: warm, minimal, modern, emotionally intelligent, softly lived-in, visually restrained, psychologically intentional, creatively intimate, calm and reflective, aesthetically refined.
+
+The image should prioritize emotional resonance over informational density. The scene should feel professionally art-directed while still emotionally human and naturally inhabited.
+
+## VISUAL STYLE
+
+The visual language should reflect:
+- nude-tone palettes, warm neutrals, creamy whites, soft beige and sand tones
+- muted taupes, warm ivory, natural browns, subtle caramel undertones
+- warm natural lighting, airy composition, soft organic textures, cozy editorial warmth
+- emotionally intelligent minimalism, subtle sophistication, restrained beauty
+
+Textures may include: linen, knit fabrics, soft cotton, matte ceramics, warm wood, cream plaster, frosted glass, layered paper textures, warm natural textiles, muted metallic accents.
+
+The environment may subtly resemble: cozy creative studios, upscale lived-in interiors, warm editorial lifestyle photography, intimate reading corners, softly curated creative spaces, emotionally grounded modern interiors.
+
+Avoid: harsh neon palettes, cyberpunk aesthetics, cold futuristic styling, sterile luxury showroom energy, visual overload, overly corporate environments, chaotic maximalism, aggressive contrast, excessive darkness, hyper-polished perfection.
+
+## CORE OBJECTIVE
+
+The image should feel less like a "portrait" and more like:
+- a personality map
+- an identity analysis
+- a cognitive profile
+- a visual self-investigation
+- an emotionally intelligent environmental study
+
+Create a psychologically accurate visual interpretation after deeply studying the subject's: recurring conversational themes, emotional rhythms, ambitions, contradictions, behavioral patterns, emotional coping mechanisms, aesthetic preferences, recurring motivations, internal tensions, and thought patterns.
+
+However — the psychology should feel IMPLIED rather than explicitly explained. Emotional depth should emerge naturally through atmosphere, styling, posture, composition, and subtle environmental storytelling.
+
+## EMOTIONAL ENVIRONMENTAL TONE
+
+The environment should feel emotionally inhabited rather than professionally staged:
+- warm, personal, softly intellectual, creatively lived-in, emotionally safe
+- introspective, calm but mentally active
+
+The environment may contain: handwritten notes, pinned reminders, stacked books, journals, coffee cups, personal objects, layered textures, subtle signs of ongoing creative thought, unfinished ideas, meaningful keepsakes, aesthetically integrated reminders.
+
+These elements should feel naturally integrated and emotionally authentic — not hyper-organized or analytically displayed.
+
+The goal is emotionally coherent softness. The space should feel like a thoughtful person genuinely lives here.
+
+## ENVIRONMENTAL STORYTELLING
+
+The environment should contain meaningful storytelling through carefully chosen details: books relevant to the user's interests, notes, journals, warm screens, unfinished creative work, reminders, routines, visual metaphors, subtle symbolic objects, emotionally meaningful details, evidence of recurring thought patterns.
+
+Instead of excessive visual overload, use layered subtlety — small details naturally woven throughout the environment that quietly reveal emotional patterns, ambitions, contradictions, obsessions, goals, or internal tensions.
+
+## REQUIRED VISUAL ELEMENTS
+
+### NAME DISPLAY — MANDATORY
+
+Display the name GENOVIE prominently within the environment using elegant approaches such as:
+- softly illuminated wall typography
+- warm backlit script
+- embossed architectural lettering
+- frosted acrylic signage
+- luxury editorial typography
+- subtle gallery-style typography
+
+The name should feel naturally integrated and clearly readable without overpowering the composition. Avoid aggressive glow effects or loud futuristic styling.
+
+## CHARACTER COMPOSITION
+
+Primary Figure: The dominant psychological identity — introspective, emotionally layered, psychologically believable, quietly driven, calm but mentally active.
+
+Secondary Figure (ONE only): Include ONE subtle secondary version through a framed Polaroid, pinned photo, mirror reflection, sketch, screen image, or distant environmental presence.
+
+The secondary version should represent: a competing identity, coping mechanism, emotional contradiction, hidden behavioral pattern, parallel ambition, or suppressed tendency.
+
+Keep the secondary figure subtle, emotionally evocative, and compositionally restrained.
+
+## ARCHETYPE ASSIGNMENT — TWO DISTINCT ROLES
+
+You must identify exactly TWO archetypes.
+
+Archetype 1 — Strength Identity — based ONLY on:
+- Emotional strengths, authentic expression, purpose, curiosity
+- Emotional intelligence, meaningful contribution, connection style
+- Energizing behavioral patterns, recurring positive emotional rhythms
+
+Archetype 2 — Shadow Identity — based ONLY on:
+- Emotional contradictions, coping mechanisms, avoidance patterns
+- Internal tension, overcontrol, emotional guarding, validation-seeking
+- Exhaustion loops, recurring behavioral friction
+
+BANNED archetype names: The Architect, The Builder, The Strategist, The Overthinker
+
+Prioritize names that feel: emotionally nuanced, psychologically observant, behaviorally specific, conversationally accurate, elegant rather than theatrical.
+Prefer concise names — one or two words maximum.
+
+## ARCHETYPE DISPLAY
+
+The archetypes and supporting traits should appear subtly integrated through restrained editorial presentation: framed profile layouts, handwritten cards, softly backlit boards, refined moodboard panels, elegant typography displays, warm monitor interfaces, subtle design layouts.
+
+The archetype section should complement the environment rather than dominate it.
+
+## EDITORIAL IDENTITY PANEL — MANDATORY
+
+Include a concise editorial-style psychological profile section within the composition. It should feel like an emotionally intelligent identity summary.
+
+The layout may resemble: an editorial identity card, a luxury magazine profile, a thoughtfully designed psychological snapshot, a refined creative dossier, an intimate personal values panel.
+
+The section should contain short first-person identity statements such as:
+"I invest in…" / "I create…" / "I protect…" / "I seek…" / "I avoid…" / "I overthink…" / "I romanticize…" / "I fear…" / "I return to…" / "I need…" / "I believe…"
+
+The statements should be: concise, psychologically observant, emotionally intelligent, aesthetically restrained, behaviorally specific, subtly revealing, conversationally accurate.
+
+Avoid generic motivational language, therapy clichés, or exaggerated self-help phrasing.
+
+## ENVIRONMENT — CONVERSATION-SOURCED
+
+Every environmental detail must come directly from conversation history. Do not invent generic aesthetic filler.
+
+The environment should be built only from: actual interests, recurring themes, stated ambitions, routines, emotional patterns, hobbies, repeated frustrations, recurring goals, aesthetic preferences, conversational obsessions, meaningful symbolic references.
+
+## MOOD & ATMOSPHERE
+
+The emotional atmosphere should emerge naturally from conversational history. The image may feel: reflective, introspective, quietly ambitious, emotionally layered, hopeful, thoughtful, creatively restless, emotionally guarded, mentally active, calm but internally alive.
+
+The mood should feel discovered rather than manufactured.
+
+## FORMAT & COMPOSITION
+
+- Aspect ratio: 4:5 vertical (Instagram optimized, 1080×1350px)
+- Mobile-first composition, balanced whitespace
+- Strong readability at phone size
+- Clean visual hierarchy, soft editorial framing, warm compositional flow
+
+## EXECUTION RULES
+
+- Do NOT ask follow-up questions
+- Do NOT use loud neon palettes
+- Do NOT create visual chaos
+- Do NOT overpopulate the frame
+- Do NOT create sterile luxury showroom aesthetics
+- Do NOT use generic productivity workspace clichés
+- Do NOT overexplain symbolism
+- Do NOT confuse the Strength and Shadow archetypes
+- Do NOT invent environmental details unrelated to conversation history
+
+Maintain: warmth, elegance, restraint, emotional intelligence, psychological realism, editorial softness, intimate environmental storytelling, subtle sophistication, emotionally coherent minimalism.
+
+Ensure the subject feels psychologically seen rather than theatrically analyzed.</pre>
+        </div>
+      </div>
+      <button class="copy-btn" id="copy-soft" onclick="copyPrompt('soft-prompt','copy-soft')">
+        <span>✦ Copy Prompt</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="how-section reveal">
+    <div class="section-eyebrow">How it works</div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">01</div>
+        <div class="how-step-title">Copy the Prompt</div>
+        <p class="how-step-body">Click copy above. The full prompt is ready — nothing to change or adjust.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">02</div>
+        <div class="how-step-title">Open ChatGPT</div>
+        <p class="how-step-body">Start a new chat. Attach a clear photo of yourself. Paste the prompt and send. A free account works.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">03</div>
+        <div class="how-step-title">Let It Know You</div>
+        <p class="how-step-body">ChatGPT reads your conversation history, surfaces your archetypes, and renders your portrait with quiet intention.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-block reveal">
+    <div>
+      <h3>Ready to be seen<br/><em>softly</em>?</h3>
+      <p>Open ChatGPT, attach your photo, paste the prompt. The reflection starts on its own — no preparation needed.</p>
+    </div>
+    <a href="https://chat.openai.com" target="_blank" rel="noopener" class="chatgpt-link">Open ChatGPT →</a>
+  </div>
+
+</div>
+
+<div class="newsletter-strip">
+  <h3>More <em>real knowledge</em><br/>in your inbox</h3>
+  <p>Weekly letters on money, health, emotions, and the life skills we were never given in school.</p>
+  <a href="index.html#newsletter" class="btn-soft">Get the Letters</a>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">Grown <em>From Scratch</em></a>
+  <span>© 2026 Grown From Scratch. All rights reserved.</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.08});
+  reveals.forEach(el => io.observe(el));
+
+  function copyPrompt(textId, btnId) {
+    const text = document.getElementById(textId).innerText;
+    const btn  = document.getElementById(btnId);
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      btn.querySelector('span').textContent = '✓ Copied';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.querySelector('span').textContent = '✦ Copy Prompt';
+      }, 2500);
+    });
+  }
+</script>
+</body>
+</html>
