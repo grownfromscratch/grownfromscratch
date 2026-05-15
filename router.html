@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loading your prompt…</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: #0a0809;
+      color: #f0eae8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 2px solid rgba(240,234,232,0.1);
+      border-top-color: #e040a0;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: rgba(240,234,232,0.45);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <p>Personalizing your prompt…</p>
+
+  <script>
+    const params   = new URLSearchParams(window.location.search);
+    const name     = params.get('name')      || '';
+    const aesthetic = params.get('aesthetic') || '';
+
+    // Match however Tally sends the answer — check for "Soft" or "Dark"
+    const isSoft = aesthetic.toLowerCase().includes('soft');
+    const isDark = aesthetic.toLowerCase().includes('dark') || aesthetic.toLowerCase().includes('ambitious');
+
+    let destination;
+    if (isSoft) {
+      destination = 'style-soft.html';
+    } else if (isDark) {
+      destination = 'style-dark.html';
+    } else {
+      // Fallback — send to soft if something unexpected comes through
+      destination = 'style-soft.html';
+    }
+
+    // Append the name so the landing page can personalize the prompt
+    const target = `${destination}?name=${encodeURIComponent(name)}`;
+
+    // Small delay so the spinner is visible, then redirect
+    setTimeout(() => {
+      window.location.replace(target);
+    }, 600);
+  </script>
+</body>
+</html>
